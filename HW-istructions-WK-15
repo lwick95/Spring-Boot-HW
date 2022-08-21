@@ -1,0 +1,20 @@
+Instructions: In Eclipse, or an IDE of your choice, write the code that accomplishes the objectives listed below. Ensure that the code compiles and runs as directed. Take screenshots of the code and of the running program (make sure to get screenshots of all required functionality) and paste them in this document where instructed below. Create a new repository on GitHub for this week’s assignments and push this document, with your Java project code, to the repository. Add the URL for this week’s repository to this document where instructed and submit this document to your instructor when complete.
+Here's a friendly tip: as you watch the videos, code along with the videos. This will help you with the homework. When a screenshot is required, look for the icon:   You will keep adding to this project throughout this part of the course. When it comes time for the final project, use this project as a starter.
+Project Resources: https://github.com/promineotech/Spring-Boot-Course-Student-Resources
+Coding Steps:
+1)	In the application you've been building add a DAO layer:
+a)	Add the package, com.promineotech.jeep.dao.
+b)	In the new package, create an interface named JeepSalesDao.
+c)	In the same package, create a class named DefaultJeepSalesDao that implements JeepSalesDao.
+d)	Add a method in the DAO interface and implementation that returns a list of Jeep models (class Jeep) and takes the model and trim parameters. Here is the method signature:
+List<Jeep> fetchJeeps(JeepModel model, String trim);
+2)	In the Jeep sales service implementation class, inject the DAO interface as an instance variable. The instance variable should be private and should be named jeepSalesDao. Call the DAO method from the service method and store the returned value in a local variable named jeeps. Return the value in the jeeps variable (we will add to this later).
+3)	In the DAO implementation class (DefaultJeepSalesDao):
+a)	Add the class-level annotation: @Service.
+b)	Add a log statement in DefaultJeepSalesDao.fetchJeeps() that logs the model and trim level. Run the integration test. Produce a screenshot showing the DAO implementation class and the log line in the IDE's console.  
+c)	In DefaultJeepSalesDao, inject an instance variable of type NamedParameterJdbcTemplate.
+d)	Write SQL to return a list of Jeep models based on the parameters: model and trim. Be sure to utilize the SQL Injection prevention mechanism of the NamedParameterJdbcTemplate using :model_id and :trim_level in the query.
+e)	Add the parameters to a parameter map as shown in the video. Don't forget to convert the JeepModel enum value to a String (i.e., params.put("model_id", model.toString());)
+f)	Call the query method on the NamedParameterJdbcTemplate instance variable to return a list of Jeep model objects. Use a RowMapper to map each row of the result set. Remember to convert modelId to a JeepModel. See the video for details. Produce a screenshot to show the complete method in the implementation class.  
+4)	Add a getter in the Jeep class for modelPK. Add the @JsonIgnore annotation to the getter to exclude the modelPK value from the returned object.
+5)	Run the test to produce a green status bar. Produce a screenshot showing the test and the green status bar.  
